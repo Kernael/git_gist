@@ -1,5 +1,5 @@
 <% provide(:title, 'Search result') %>
-<% @gists = @search.send %>
+<% @gists = @search.send_req %>
 
 <h1><%= yield :title %></h1>
 
@@ -7,6 +7,6 @@
     <p>No results</p>
 <% else %>
     <%= @gists.each do |gist| %>
-        <p><%= gist.name %></p>
+        <%= puts gist %>
     <% end %>
 <% end %>

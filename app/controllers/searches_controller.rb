@@ -6,7 +6,7 @@ class SearchesController < ApplicationController
   end
 
   def create
-    @search = Search.new
+    @search = Search.new(search_params)
 
     respond_to do |format|
       if @search.save

@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608112449) do
+ActiveRecord::Schema.define(version: 20160608125122) do
 
   create_table "searches", force: :cascade do |t|
     t.text     "username"
-    t.integer  "gist_id"
+    t.text     "gist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
