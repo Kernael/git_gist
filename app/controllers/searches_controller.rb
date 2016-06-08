@@ -10,7 +10,7 @@ class SearchesController < ApplicationController
 
     respond_to do |format|
       if @search.save
-        format.html { redirect_to @search, notice: 'Search result :' }
+        format.html { redirect_to @search, notice: 'Search processed' }
         format.json { render :show, status: :created, location: @search }
       else
         format.html { render :new }
