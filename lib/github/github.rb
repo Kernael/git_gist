@@ -1,19 +1,40 @@
 require 'httparty'
 
-module GitHub
-  extend self
+class GitHub
 
-  def get_by_id(id)
-    uri = base_uri + gists_uri + '/' + id.to_s
-    HTTParty.get(uri)
+  def initialize(username, gist_id, opts = {})
+    @uri  = base_uri
+    @opts = opts
+
+    if not gist_id.blank?
+      get_by_id(gist_id, opts)
+    elsif not username.blank?
+      get_by_username(username)
+    else
+      get_by_list
+    end
   end
 
-  def get_by_username(username)
-    uri = base_uri + users_uri + '/' + username + gists_uri
-    HTTParty.get(uri)
+  def send_req
+    r = HTTParty.get(@uri)
+    r += HTTParty.get(@uri + forks_uri) if @opts[:forks]
+    r
   end
 
   private
+
+  def get_by_list
+    @uri += gists_uri
+  end
+
+  def get_by_id(gist_id, opts)
+    get_by_list
+    @uri += '/' + gist_id.to_s
+  end
+
+  def get_by_username(username)
+    @uri += users_uri + '/' + username + gists_uri
+  end
 
   def base_uri
     @__base_uri__ ||= 'https://api.github.com'
@@ -25,5 +46,9 @@ module GitHub
 
   def users_uri
     @__users_uri__ ||= '/users'
+  end
+
+  def forks_uri
+    @__forks_uri__ ||= '/forks'
   end
 end

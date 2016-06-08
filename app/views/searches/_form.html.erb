@@ -3,6 +3,8 @@
     <%= f.text_field :username %><br/>
     <%= f.label :gist_id, 'Gist ID' %>
     <%= f.text_field :gist_id %><br/>
+    <%= f.label :forks, 'Display forks ?' %>
+    <%= f.check_box :forks %>
     <br/><br/>
     <%= submit_tag 'Search' %>
 <% end %>
