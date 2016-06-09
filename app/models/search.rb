@@ -11,8 +11,7 @@ class Search < ActiveRecord::Base
 
   def must_have_username_or_id
     if username.blank? && gist_id.blank?
-      errors.add(:username, 'Must have either username or id specified')
-      errors.add(:gist_id, 'Must have either username or id specified')
+      errors.add(:username, 'or ID must be specified')
     end
   end
 end
